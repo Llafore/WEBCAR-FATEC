@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 interface ActionAreaCardProps {
   image: string;
@@ -45,8 +46,17 @@ export default function ActionAreaCard({
   ano,
   km,
 }: ActionAreaCardProps) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Envia os dados do carro como state para a página de detalhes
+    navigate('/detalhes-carro', {
+      state: { image, modelo, versao, altText, preco, ano, km },
+    });
+  };
+
   return (
-    <ResponsiveCard>
+    <ResponsiveCard onClick={handleClick}>
       <CardActionArea>
         <CardMedia
           component="img"
