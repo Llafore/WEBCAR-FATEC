@@ -19,6 +19,10 @@ const PageContainer = styled(Box)({
   gap: '32px',
   position: 'relative',
   minHeight: '80vh',
+  // Ajuste a direção para vertical quando a largura da tela for menor que 600px
+  '@media (max-width: 950px)': {
+    flexDirection: 'column', // Altere para coluna em telas pequenas
+  },
 });
 
 const ImageContainer = styled(Box)({
@@ -35,7 +39,7 @@ const SummaryCard = styled(Card)({
   flexDirection: 'column',
   gap: '24px',
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-  justifyContent: 'space-between', // Distribui os itens verticalmente
+  justifyContent: 'space-between',
   height: '100%',
 });
 
