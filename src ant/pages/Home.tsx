@@ -32,7 +32,7 @@ import { styled } from '@mui/material/styles';
         { image: '/assets/images/catalogo/000/005-001.jpg', modelo: 'Modelo X', versao: '2p flex 3.5L', preco: '100.000,00', ano: '2022/2023', km: '85.000' },
         ];
 
-const StyledDiv = styled('div')({
+  const StyledDiv = styled('div')({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',

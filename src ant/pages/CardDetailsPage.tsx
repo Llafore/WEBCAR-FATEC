@@ -58,8 +58,8 @@ export default function CarDetailsPage() {
     navigate(-1); // Retorna para a página anterior
   };
 
-  const handleSignup = () => {
-    navigate('/finalizacao'); // Redireciona para a página de login
+  const handleBuyClick = () => {
+    alert("Compra realizada com sucesso!"); // Aqui poderia ir para uma página de checkout
   };
 
   return (
@@ -107,7 +107,7 @@ export default function CarDetailsPage() {
         
         {/* Botão de compra no final do resumo */}
         <Stack direction="row" justifyContent="center" sx={{ marginTop: '24px' }}>
-          <Button variant="contained" color="secondary" onClick={handleSignup} sx={{ width: '100%' }}>
+          <Button variant="contained" color="secondary" onClick={handleBuyClick} sx={{ width: '100%' }}>
             Comprar
           </Button>
         </Stack>

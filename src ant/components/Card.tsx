@@ -17,6 +17,7 @@ interface ActionAreaCardProps {
   km: string;
 }
 
+// Card responsivo com largura mínima e máxima
 const ResponsiveCard = styled(Card)({
   maxWidth: '400px',
   minWidth: '280px',
@@ -27,6 +28,7 @@ const ResponsiveCard = styled(Card)({
   },
 });
 
+// Estilos para o conteúdo do card, especialmente para exibir a imagem grande e destacar o modelo e preço
 const CardContentStyled = styled(CardContent)({
   display: 'flex',
   flexDirection: 'column',
@@ -34,7 +36,6 @@ const CardContentStyled = styled(CardContent)({
   alignItems: 'center',
   textAlign: 'center',
 });
-
 
 export default function ActionAreaCard({
   image,
@@ -48,6 +49,7 @@ export default function ActionAreaCard({
   const navigate = useNavigate();
 
   const handleClick = () => {
+    // Envia os dados do carro como state para a página de detalhes
     navigate('/detalhes-carro', {
       state: { image, modelo, versao, altText, preco, ano, km },
     });
