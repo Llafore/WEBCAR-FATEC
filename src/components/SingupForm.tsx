@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Link, useMediaQuery, styled, alpha } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import axios from 'axios';
 
 const SignupContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -39,7 +40,7 @@ const SignupForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     const isNameValid = name.length >= 2;
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     const isCpfValid = cpf.replace(/\D/g, '').length === 11;
@@ -71,20 +72,28 @@ const SignupForm: React.FC = () => {
       return;
     }
 
-    // Create user object
     const user = {
-      name,
-      email,
-      phone,
-      cpf,
-      password
-    };
+      nome: name,
+      email: email,
+      telefone: phone,
+      cpf: cpf,
+      senha: password,
+    }; 
 
-    // Send user data to backend
-    console.log('Enviando dados para o backend:', user);
-    alert('Cadastro gerado!');
+    try {
+      const response = await axios.post('http://localhost:8080/api/usuario',user)  
+  
+      if (response.status === 201) {
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = '/';
+      } else {
+        alert(`Erro ao cadastrar: ${response.data.message || 'Erro desconhecido'}`);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar os dados:', error);
+      alert('Erro ao cadastrar. Tente novamente.');
+    }
 
-    // Redirect to home page
     window.location.href = '/';
   };
 

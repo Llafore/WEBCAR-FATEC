@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Link, useMediaQuery, styled, alpha } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const LoginContainer = styled(Box)(({ theme }) => ({
@@ -52,9 +53,25 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    alert('Efetuando Login...');
-    console.log({ email, password });
+  const user = {
+    email: email,
+    senha: password
+  }; 
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/usuario/login', user)  
+  
+      if (response.status === 200) {
+        alert('Login realizado com sucesso!');
+        window.location.href = '/';
+      } else {
+        alert(`Email ou Senhas incorretos!`);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar os dados:', error);
+      alert('Erro ao logar. Tente novamente mais tarde.');
+    }
   };
 
   const handleForgotPassword = () => {
