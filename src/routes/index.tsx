@@ -4,6 +4,7 @@ import CarDetailsPage from "../pages/CardDetailsPage";
 import LoginForm from "../components/LoginForm";
 import SingupForm from "../components/SingupForm";
 import Finalizacao from "../components/Finalizacao";
+import { Pesquisa } from "../pages/Pesquisa";
 
 export function AppRoutes(){
     return(
@@ -13,6 +14,7 @@ export function AppRoutes(){
             <Route path="/login" element={<LoginForm />} />
             <Route path="/cadastro" element={<SingupForm />} />
             <Route path="/finalizacao" element={<Finalizacao />} />
+            <Route path="/pesquisa" element={<Pesquisa />} />
         </Routes>
     )
 }

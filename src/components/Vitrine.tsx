@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import ActionAreaCard from '../components/Card';
+import { useState } from 'react';
 
 const StyledDiv = styled('div')({
   display: 'flex',
@@ -12,32 +13,46 @@ const StyledDiv = styled('div')({
   boxSizing: 'border-box',
 });
 
-interface VitrineProps {
-  items: {
-    image: string;
-    modelo: string;
-    versao: string;
-    preco: string;
-    ano: string;
-    km: string;
-  }[];
-}
+type Veiculo = {
+  image: string;
+  modelo: string;
+  versao: string;
+  preco: number;
+  ano: number;
+  km: number;
+};
+
+type VitrineProps = {
+  items: Veiculo[];
+};
+
 
 export function Vitrine({ items }: VitrineProps) {
+  if (!items || items.length === 0) {
+    return <p>Nenhum veículo encontrado.</p>;
+  }
+
   return (
     <StyledDiv>
-      {items.map((item, index) => (
-        <ActionAreaCard
-          key={index}
-          image={item.image}
-          modelo={item.modelo}
-          altText="Foto"
-          versao={item.versao}
-          preco={item.preco}
-          ano={item.ano}
-          km={item.km}
-        />
-      ))}
+      {items.map((item, index) => {
+        const precoFormatado = new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(item.preco);
+
+        return (
+          <ActionAreaCard
+            key={index}
+            image={item.image}
+            modelo={item.modelo}
+            altText="Foto"
+            versao={item.versao}
+            preco={precoFormatado}
+            ano={item.ano.toString()}
+            km={item.km.toString()}
+          />
+        );
+      })}
     </StyledDiv>
   );
 }

@@ -1,6 +1,8 @@
 import { carregaVeiculos } from '../services/carregaVeiculos'; // O caminho correto
 import { Vitrine } from '../components/Vitrine';
 
+const endPoint = 'http://localhost:8080/api/veiculo/pesquisa';
+
 type Veiculo = {
     image: string;
     modelo: string;
@@ -10,19 +12,17 @@ type Veiculo = {
     km: number;
   };
   
-const veiculoVazio: Veiculo = {
+const veiculoPesquisa: Veiculo = {
     image: "",
-    modelo: "",
+    modelo: "", // colocar aqui o valor captado do edit do label
     versao: "",
     preco: 0,
     ano: 0,
     km: 0,
   };
 
-const endPoint = 'http://localhost:8080/api/veiculo/recentes';
-
-export function Home() {
-  const { cardsData, isLoading } = carregaVeiculos(endPoint, veiculoVazio);
+export function Pesquisa() {
+  const { cardsData, isLoading } = carregaVeiculos(endPoint, veiculoPesquisa);
 
   if (isLoading) {
     return <p>Carregando...</p>;

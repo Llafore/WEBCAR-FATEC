@@ -82,10 +82,9 @@ const SignupForm: React.FC = () => {
 
     try {
       const response = await axios.post('http://localhost:8080/api/usuario',user)  
-  
-      if (response.status === 201) {
-        alert('Cadastro realizado com sucesso!');
-        window.location.href = '/';
+      if (response.status == 201) {
+        alert('Cadastro realizado com sucesso, encaminhando para o login!');
+        window.location.href = '/login';
       } else {
         alert(`Erro ao cadastrar: ${response.data.message || 'Erro desconhecido'}`);
       }
@@ -94,7 +93,7 @@ const SignupForm: React.FC = () => {
       alert('Erro ao cadastrar. Tente novamente.');
     }
 
-    window.location.href = '/';
+    // window.location.href = '/';
   };
 
   return (

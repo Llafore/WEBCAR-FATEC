@@ -63,7 +63,8 @@ const LoginForm: React.FC = () => {
       const response = await axios.post('http://localhost:8080/api/usuario/login', user)  
   
       if (response.status === 200) {
-        alert('Login realizado com sucesso!');
+        localStorage.setItem('usuario', JSON.stringify(response.data));
+        alert(`Login realizado com sucesso! Bem-vindo, ${response.data.nome}!`);
         window.location.href = '/';
       } else {
         alert(`Email ou Senhas incorretos!`);
