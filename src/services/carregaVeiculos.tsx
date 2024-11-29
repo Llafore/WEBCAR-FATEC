@@ -16,6 +16,7 @@ export function carregaVeiculos(api: string, entity : Veiculo) {
 
   useEffect(() => {
     const fetchVeiculos = async () => {
+      setCardsData([]);
       try {
         const response = await axios.post(api, entity);
         if (response.status === 200) {

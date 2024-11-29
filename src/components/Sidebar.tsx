@@ -5,10 +5,9 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 interface SidebarProps {
   open: boolean;
@@ -16,15 +15,25 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    onClose();
+    window.location.reload();
+  };
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={onClose} onKeyDown={onClose}>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary={<Typography fontWeight="bold">Filtros</Typography>} />
+          </ListItemButton>
+        </ListItem>
+        {['Mais baratos', 'Mais confiáveis', 'Sedans', 'Coupes'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -32,13 +41,15 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary={<Typography fontWeight="bold">Marcas</Typography>} />
+          </ListItemButton>
+        </ListItem>
+        {['Honda', 'Toyota', 'Chevrolet'].map((brand) => (
+          <ListItem key={brand} disablePadding>
+            <ListItemButton onClick={() => handleNavigation(`/pesquisa/${brand}`)}>
+              <ListItemText primary={brand} />
             </ListItemButton>
           </ListItem>
         ))}

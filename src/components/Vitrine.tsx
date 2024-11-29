@@ -1,6 +1,5 @@
 import { styled } from '@mui/material/styles';
 import ActionAreaCard from '../components/Card';
-import { useState } from 'react';
 
 const StyledDiv = styled('div')({
   display: 'flex',

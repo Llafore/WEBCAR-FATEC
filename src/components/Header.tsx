@@ -80,6 +80,15 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const handleSearchKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      navigate(`/pesquisa/${encodeURIComponent(searchValue)}`)
+      window.location.reload();
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -106,7 +115,12 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+              <StyledInputBase 
+                placeholder="Search…" 
+                inputProps={{ 'aria-label': 'search' }} 
+                value={searchValue} 
+                onChange={(e) => setSearchValue(e.target.value)} 
+                onKeyPress={handleSearchKeyPress}/>
             </Search>
           </Box>
 
